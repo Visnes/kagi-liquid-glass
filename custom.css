@@ -1,0 +1,893 @@
+/*
+ *  ██╗     ██╗ ██████╗ ██╗   ██╗██╗██████╗      ██████╗ ██╗      █████╗ ███████╗███████╗
+ *  ██║     ██║██╔═══██╗██║   ██║██║██╔══██╗    ██╔════╝ ██║     ██╔══██╗██╔════╝██╔════╝
+ *  ██║     ██║██║   ██║██║   ██║██║██║  ██║    ██║  ███╗██║     ███████║███████╗███████╗
+ *  ██║     ██║██║▄▄ ██║██║   ██║██║██║  ██║    ██║   ██║██║     ██╔══██║╚════██║╚════██║
+ *  ███████╗██║╚██████╔╝╚██████╔╝██║██████╔╝    ╚██████╔╝███████╗██║  ██║███████║███████║
+ *  ╚══════╝╚═╝ ╚══▀▀═╝  ╚═════╝ ╚═╝╚═════╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝
+ *                                           Liquid Glass Theme for Kagi Search by Visnes
+ *                                                   https://github.com/Visnes/kagi-theme
+ *                                               https://openkagi.com/themes/liquid-glass
+ */
+
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * WALLPAPER (optional — Kagi home page only)
+ *
+ * The wallpaper applies only on the Kagi home page (body:has(.app-box-center)).
+ * On search-result pages the gradient background shows instead.
+ * Set either variable to  none  to disable that colour-scheme variant.
+ * ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --wallpaper-light: url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/d7afddd25628b2791ee45499b338b9c1cbd0a7bb/bg/tahoe-light.webp");
+  --wallpaper-dark: url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/refs/heads/main/bg/tahoe-dark.webp");
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * GLASS OPACITY — the only value you need to tune.
+ *
+ *   0.05  → crystal-clear glass  (best with colourful OS wallpapers)
+ *   0.12  → light frost          ← recommended default
+ *   0.25  → medium frost         (good for light / plain backgrounds)
+ *   0.50  → heavy frost          (near-opaque panels)
+ *
+ * Dark mode panels are automatically scaled to remain visible at low values.
+ * ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --glass-opacity: 0.12;
+
+  /* ── Derived glass tints ── */
+  --glass-bg-light: rgba(255, 255, 255, var(--glass-opacity));
+  --glass-bg-dark:  rgba(22, 22, 30,  calc(var(--glass-opacity) + 0.32));
+
+  /* ── Glass blur chain — applied directly to every glass element ──
+     blur(28px)     : frosted-glass base
+     saturate(240%) : punchy colour through the glass (key for liquid glass look)
+     brightness(1.06): slight lightening to simulate refraction
+     contrast(1.04) : keeps colours from washing out                           */
+  --glass-blur:    blur(28px) saturate(240%) brightness(1.06) contrast(1.04);
+
+  /* ── Rim highlights — the defining Liquid Glass chrome edge ── */
+  --glass-rim-light:
+    inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.90),
+    inset 0 0 6px 1px  rgba(255, 255, 255, 0.50);
+  --glass-rim-dark:
+    inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.28),
+    inset 0 0 6px 1px  rgba(255, 255, 255, 0.12);
+
+  /* ── Border stroke ── */
+  --glass-border-light: rgba(255, 255, 255, 0.40);
+  --glass-border-dark:  rgba(255, 255, 255, 0.14);
+
+  /* ── Outer drop-shadow ── */
+  --glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --glass-shadow-dark:  0 8px 32px rgba(0, 0, 0, 0.50), 0 2px 8px rgba(0, 0, 0, 0.28);
+
+  /* ── System accent ── */
+  --blue:     #007AFF;
+  --blue-rgb: 0, 122, 255;
+
+  /* ── Text ── */
+  --text-light: rgba(0, 0, 0, 0.85);
+  --text-dark:  rgba(255, 255, 255, 0.92);
+  --text-font:  -apple-system, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+
+  /* ── Page backgrounds ── */
+  --bg-light: #e8ecf2;
+  --bg-dark:  #0f101a;
+
+  /* ── Buttons ── */
+  --btn-glass-bg-light: rgba(255, 255, 255, 0.28);
+  --btn-glass-bg-dark:  rgba(255, 255, 255, 0.08);
+  --btn-blue-shadow:
+    0 4px 20px rgba(var(--blue-rgb), 0.40),
+    0 1px 4px  rgba(0, 0, 0, 0.20);
+  --btn-blue-shadow-hover:
+    0 6px 28px rgba(var(--blue-rgb), 0.55),
+    0 2px 8px  rgba(0, 0, 0, 0.25);
+
+  /* ── Active-mode defaults (light) ── */
+  --bg:           var(--bg-light);
+  --text:         var(--text-light);
+  --glass-bg:     var(--glass-bg-light);
+  --glass-border: var(--glass-border-light);
+  --glass-rim:    var(--glass-rim-light);
+  --glass-shadow: var(--glass-shadow-light);
+  --btn-glass-bg: var(--btn-glass-bg-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:           var(--bg-dark);
+    --text:         var(--text-dark);
+    --glass-bg:     var(--glass-bg-dark);
+    --glass-border: var(--glass-border-dark);
+    --glass-rim:    var(--glass-rim-dark);
+    --glass-shadow: var(--glass-shadow-dark);
+    --btn-glass-bg: var(--btn-glass-bg-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:           var(--bg-light);
+    --text:         var(--text-light);
+    --glass-bg:     var(--glass-bg-light);
+    --glass-border: var(--glass-border-light);
+    --glass-rim:    var(--glass-rim-light);
+    --glass-shadow: var(--glass-shadow-light);
+    --btn-glass-bg: var(--btn-glass-bg-light);
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Base
+ * ════════════════════════════════════════════════════════ */
+
+body {
+  font-family: var(--text-font);
+  color: var(--text);
+  background-color: var(--bg);
+  background-attachment: fixed;
+}
+
+/* Base body gets the gradient only. The wallpaper is added as a first layer
+   on the home page only (identified by .app-box-center, present only there). */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #e4e8f0;
+    background-image:    linear-gradient(145deg, #e8ecf4 0%, #dde5f0 40%, #e4dff2 100%);
+    background-size:     auto;
+    background-position: top;
+    background-repeat:   no-repeat;
+    background-attachment: fixed;
+  }
+  body:has(.doggo_sit_a) {
+    background-image:    var(--wallpaper-light), linear-gradient(145deg, #e8ecf4 0%, #dde5f0 40%, #e4dff2 100%);
+    background-size:     cover, auto;
+    background-position: center, top;
+    background-repeat:   no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0f101a;
+    background-image:    linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
+    background-size:     auto;
+    background-position: top;
+    background-repeat:   no-repeat;
+    background-attachment: fixed;
+  }
+  body:has(.doggo_sit_a) {
+    background-image:    var(--wallpaper-dark), linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
+    background-size:     cover, auto;
+    background-position: center, top;
+    background-repeat:   no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+  }
+}
+
+hr {
+  display: none;
+}
+
+/* Home page in light mode: text that falls directly over the wallpaper must be
+   white — dark text on a nature photo is unreadable. Restore dark inside the
+   glass panels (search area, inputs) where the frosted backing provides contrast. */
+@media (prefers-color-scheme: light) {
+  body:has(.doggo_sit_a) {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  body:has(.doggo_sit_a) .suggestions_area,
+  body:has(.doggo_sit_a) .auto_suggestions,
+  body:has(.doggo_sit_a) input,
+  body:has(.doggo_sit_a) textarea {
+    color: var(--text-light) !important;
+  }
+  body:has(.doggo_sit_a) .flex.flex-wrap.justify-center.fs-13,
+  body:has(.doggo_sit_a) .flex.flex-wrap.justify-center.fs-13 a,
+  body:has(.doggo_sit_a) .landing_cat_buttons .btn-search,
+  body:has(.doggo_sit_a) .landing_cat_buttons .nav-item,
+  body:has(.doggo_sit_a) .menu-advanced-search-toggle {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+}
+
+body .overlay-close-event-handler {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+a:hover,
+button:hover,
+label:hover {
+  color: var(--blue) !important;
+}
+
+a.nav-item-link.--active {
+  color: var(--blue) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Header
+ * ════════════════════════════════════════════════════════ */
+
+.app-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+  max-width: unset;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-rim), 0 4px 24px rgba(0, 0, 0, 0.10);
+}
+
+/* Shimmer line along the top edge */
+.app-header::before,
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.70) 25%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.70) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+[content-center] .app-header {
+  padding-inline: calc((100vw - var(--app_content_width)) / 2);
+}
+
+.content-box {
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+.app-logo {
+  padding-inline-start: 1em;
+  top: 10px;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Navigation
+ * ════════════════════════════════════════════════════════ */
+
+.app-nav,
+.landing_cat_buttons {
+  border-bottom: 0;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Search bar & Suggestions
+ * ════════════════════════════════════════════════════════ */
+
+/* backdrop-filter on .auto_suggestions (outer), not .suggestions_area (child) —
+   Kagi's overflow:hidden would block a child's backdrop-filter in Chromium,
+   but applying it to the outer element itself is unaffected. */
+.auto_suggestions--visible,
+.auto_suggestions {
+  z-index: 10000 !important;
+}
+
+.auto_suggestions {
+  background: rgba(255, 255, 255, 0.50) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(260%) brightness(1.08) contrast(1.05) !important;
+          backdrop-filter: blur(36px) saturate(260%) brightness(1.08) contrast(1.05) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 0 0 24px 24px !important;
+  box-shadow: var(--glass-rim), var(--glass-shadow) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .auto_suggestions {
+    background: rgba(22, 22, 30, 0.72) !important;
+  }
+}
+
+.suggestions_area {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.auto_suggestions_footer,
+.as-footer {
+  background: var(--glass-bg) !important;
+  border-top: 1px solid var(--glass-border) !important;
+  border-radius: 0 !important;
+}
+
+.auto_suggestions_lenses  {
+  z-index: 2;
+}
+
+#searchFormSubmit {
+  border-radius: 9999px !important;
+  color: white !important;
+  margin-left: 0.75em;
+}
+
+.search-form:focus-within {
+  box-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* The variable chain --color-search-input → --input-bg → --primary-50 → --chrome-900
+   only reaches the container. The inner <input> element has its own background (the
+   "second background"), so both layers need explicit transparent overrides. */
+.search-input-container,
+._0_search-input-container {
+  background: transparent !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+.search-input-container input,
+._0_search-input-container input,
+._0_search-input,
+.search-input {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.search-input-container input::placeholder,
+._0_search-input-container input::placeholder,
+._0_search-input::placeholder,
+.search-input::placeholder {
+  color: rgba(0, 0, 0, 0.40) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-input-container input::placeholder,
+  ._0_search-input-container input::placeholder,
+  ._0_search-input::placeholder,
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.40) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Modals & Overlays
+ * ════════════════════════════════════════════════════════ */
+
+#quickSettings {
+  z-index: 10000 !important;
+}
+
+.advanced-search-modal-backdrop {
+  z-index: 99999 !important;
+}
+
+.advanced-search-modal {
+  background: var(--glass-bg) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--glass-rim), var(--glass-shadow) !important;
+}
+
+/* .input is a wrapper <div> — style it for the glass container look */
+.advanced-search-modal .input {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 8px !important;
+}
+
+/* Target the actual <input>/<textarea> inside — overrides Kagi's global input background */
+.advanced-search-modal .input input,
+.advanced-search-modal .input textarea,
+.advanced-search-modal .input select {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--text) !important;
+}
+
+.advanced-search-modal .input input::placeholder,
+.advanced-search-modal .input textarea::placeholder {
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .advanced-search-modal .input input::placeholder,
+  .advanced-search-modal .input textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Content Areas
+ * ════════════════════════════════════════════════════════ */
+
+.body-content {
+  background: transparent;
+}
+
+.app-box-center {
+  padding-top: 180px;
+}
+
+/* No backdrop-filter on .scene — it would create a stacking context that traps
+   child dropdown z-indexes, causing menus to render behind sibling result cards.
+   Use a more opaque solid tint instead (same reasoning as .app-box-center in aqua). */
+.scene {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 20px;
+  box-shadow: var(--glass-rim), var(--glass-shadow) !important;
+  padding: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .scene {
+    background: rgba(22, 22, 30, 0.70) !important;
+  }
+}
+
+/* When a dropdown is open inside a result card, lift that card above its siblings.
+   All .scene cards sit at z-index:auto by default; z-index:1 here beats that so
+   the card (and its overflowing dropdown) paints AFTER later DOM siblings. */
+.scene:has(._0_k_ui_dropdown_data_list),
+.scene:has(._0_k_ui_data_list),
+.scene:has(._0_more_search_box),
+.scene:has(.k_ui_dropdown_data_list),
+.scene:has(.k_ui_data_list),
+.scene:has(.dd-list) {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Dropdowns & Lists
+ * ════════════════════════════════════════════════════════ */
+
+/* Dropdowns need:
+   - high z-index so they float above search results
+     (backdrop-filter creates a new stacking context, resetting z-order)
+   - a solid opaque background — backdrop-filter blur does NOT render on children
+     of a backdrop-filter parent in Chromium; solid ~95% opacity is the right fallback
+     (macOS also uses ~88–95% opacity on menus, not clear glass)
+   The .scene:has(...) rule lifts the card containing an open dropdown above
+   its siblings, preventing later DOM cards from painting over the popup. */
+._0_k_ui_dropdown_data_list,
+._0_k_ui_data_list,
+._0_more_search_box,
+.k_ui_dropdown_data_list,
+.k_ui_data_list,
+.dd-list {
+  z-index: 99999 !important;
+  overflow: visible !important; /* Kagi sets overflow:hidden which blocks backdrop-filter in Chromium */
+  background: rgba(238, 241, 248, 0.55) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--glass-rim), var(--glass-shadow) !important;
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  ._0_k_ui_dropdown_data_list,
+  ._0_k_ui_data_list,
+  ._0_more_search_box,
+  .k_ui_dropdown_data_list,
+  .k_ui_data_list,
+  .dd-list {
+    background: rgba(24, 24, 34, 0.55) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Shadows
+ * ════════════════════════════════════════════════════════ */
+
+.logo,
+.doggo_sit_a {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Buttons
+ *
+ * Shimmer lives in the multi-layer background — NOT in ::before —
+ * so #searchFormSubmit::before { content: "Fetch" } has nothing
+ * to fight against and renders clean text.
+ * ════════════════════════════════════════════════════════ */
+
+.btn {
+  font-family: var(--text-font);
+  font-weight: 500;
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: #ffffff;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  /* Three-layer background:
+     1. Top shimmer — specular highlight
+     2. Bottom glow
+     3. Main blue gradient              */
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.00) 52%
+    ) center top / 92% 52% no-repeat,
+    linear-gradient(to top,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0.00) 40%
+    ) center bottom / 80% 40% no-repeat,
+    linear-gradient(
+      160deg,
+      rgba(10, 132, 255, 0.92) 0%,
+      rgba(0, 122, 255, 0.88) 50%,
+      rgba(0, 100, 220, 0.92) 100%
+    );
+
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    inset 0 0 4px 1px rgba(255, 255, 255, 0.25),
+    var(--btn-blue-shadow);
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+
+.btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.65),
+    inset 0 0 4px 1px rgba(255, 255, 255, 0.30),
+    var(--btn-blue-shadow-hover);
+}
+
+.btn:active,
+.btn:focus {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.40),
+    inset 0 2px 8px rgba(0, 0, 0, 0.30),
+    0 1px 4px rgba(0, 0, 0, 0.20);
+}
+
+.btn.--primary {
+  color: #ffffff;
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    inset 0 0 4px 1px rgba(255, 255, 255, 0.25),
+    var(--btn-blue-shadow);
+}
+
+/* Fetch button needs explicit sizing since Kagi treats it as a small icon button */
+#searchFormSubmit {
+  padding:   0.45em 1.3em !important;
+  min-width: 4.5em !important;
+  height:    auto !important;
+}
+
+#searchFormSubmit::before {
+  content: "Fetch";
+  line-height: 1;
+}
+
+#searchFormSubmit svg {
+  display: none;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Filter Items (search-type pills: Images, Videos, …)
+ * ════════════════════════════════════════════════════════ */
+
+.filter-item {
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  background: var(--btn-glass-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.65),
+    inset 0 0 3px rgba(255, 255, 255, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.10);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-item:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.80),
+    inset 0 0 3px rgba(255, 255, 255, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    0 0 8px rgba(var(--blue-rgb), 0.18);
+}
+
+.filter-item:focus,
+.filter-item:active {
+  border: 1px solid var(--glass-border);
+  transform: translateY(1px);
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.40),
+    inset 0 2px 6px rgba(0, 0, 0, 0.20),
+    0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+._0_lenses.filter-item {
+  all: unset;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Toggle Switches
+ * ════════════════════════════════════════════════════════ */
+
+.k_ui_toggle_switch input:checked ~ .k_ui_toggle_switch_bar,
+.k_ui_toggle_switch.--enabled .k_ui_toggle_switch_bar,
+.k_ui_toggle_switch input:checked ~ ._0_lensToggler {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.40) 0%,
+      rgba(255, 255, 255, 0.00) 50%
+    ) center top / 90% 50% no-repeat,
+    linear-gradient(
+      160deg,
+      rgba(10, 132, 255, 0.92) 0%,
+      rgba(0, 122, 255, 0.88) 100%
+    ) !important;
+
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    var(--btn-blue-shadow) !important;
+}
+
+.k_ui_toggle_switch_bar::after,
+._0_lensToggler::after {
+  border: none !important;
+}
+
+.k_ui_toggle_switch input:checked:hover ~ .k_ui_toggle_switch_bar,
+.k_ui_toggle_switch input:checked:hover ~ ._0_lensToggler {
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.65),
+    var(--btn-blue-shadow-hover) !important;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.k_ui_toggle_switch input:not(:checked):hover ~ .k_ui_toggle_switch_bar,
+.k_ui_toggle_switch input:not(:checked):hover ~ ._0_lensToggler {
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.65),
+    0 2px 10px rgba(0, 0, 0, 0.12),
+    0 0 8px rgba(var(--blue-rgb), 0.20);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Tooltips
+ * ════════════════════════════════════════════════════════ */
+
+.trigger > .tooltip.top {
+  bottom: auto !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  transform: none !important;
+  margin-bottom: var(--offset, 10px) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Footer
+ * ════════════════════════════════════════════════════════ */
+
+.main-footer {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+}
+
+.main-footer,
+.main-footer a,
+.copyright,
+.copyright::after {
+  /* text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); */
+  color: #fff !important;
+}
+
+.copyright::after {
+  content: "© Visnes. Themenize the Kagi.";
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Mobile Responsive
+ * ════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  body {
+    color: var(--text);
+  }
+
+  .spt {
+    display: none;
+  }
+
+  .content-area,
+  .mob {
+    background: transparent !important;
+  }
+
+  .a-w {
+    background: transparent;
+  }
+
+  ._0_filters-panel,
+  .serp-nav {
+    background: none !important;
+  }
+
+  .m-h {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 1em;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-rim), 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .top-nav {
+    padding-top: 150px !important;
+    z-index: 1;
+  }
+
+  .quick-settings,
+  .quick-settings-footer {
+    background: var(--glass-bg) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 16px !important;
+  }
+
+  .quick-settings.--open {
+    z-index: 999 !important;
+  }
+
+  .d,
+  .description {
+    color: var(--text) !important;
+  }
+
+  .app-box-center {
+    padding-top: 8vh;
+  }
+
+  header,
+  .app-header,
+  .top-bar,
+  .spt {
+    padding: 0.5em;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 99;
+  }
+
+  .auto_suggestions {
+    max-width: 100vw;
+    left: 0;
+    right: 0;
+    border-radius: 14px !important;
+  }
+
+  .m-app-logo {
+    color: var(--text) !important;
+  }
+
+  .logo {
+    display: none !important;
+    filter: none !important;
+  }
+
+  .doggo_sit_a {
+    width: 100%;
+    height: auto;
+  }
+
+  .sri-group,
+  .search-result {
+    border-bottom: 0 !important;
+  }
+
+  .s-f-w.--active {
+    background: var(--glass-bg) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+  }
+
+  .main-footer::after {
+    content: "© Kagi. Humanize the Web.\A© Visnes. Themenize the Kagi.";
+    font-size: 0.7rem;
+    display: block;
+    text-align: center;
+    white-space: pre;
+  }
+
+  .landing_cat_buttons > button.--active {
+    color: #ffffff !important;
+    background: linear-gradient(
+      160deg,
+      rgba(10, 132, 255, 0.92) 0%,
+      rgba(0, 122, 255, 0.88) 100%
+    ) !important;
+    border: 1px solid rgba(255, 255, 255, 0.30) !important;
+    box-shadow:
+      inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+      var(--btn-blue-shadow) !important;
+  }
+
+  .landing_cat_buttons {
+    padding: 0.5em 20px 0.75em !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+  }
+}
