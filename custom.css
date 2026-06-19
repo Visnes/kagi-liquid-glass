@@ -1,8 +1,20 @@
-﻿@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
+/*
+ *  ██╗     ██╗ ██████╗ ██╗   ██╗██╗██████╗      ██████╗ ██╗      █████╗ ███████╗███████╗
+ *  ██║     ██║██╔═══██╗██║   ██║██║██╔══██╗    ██╔════╝ ██║     ██╔══██╗██╔════╝██╔════╝
+ *  ██║     ██║██║   ██║██║   ██║██║██║  ██║    ██║  ███╗██║     ███████║███████╗███████╗
+ *  ██║     ██║██║▄▄ ██║██║   ██║██║██║  ██║    ██║   ██║██║     ██╔══██║╚════██║╚════██║
+ *  ███████╗██║╚██████╔╝╚██████╔╝██║██████╔╝    ╚██████╔╝███████╗██║  ██║███████║███████║
+ *  ╚══════╝╚═╝ ╚══▀▀═╝  ╚═════╝ ╚═╝╚═════╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝
+ *                                           Liquid Glass Theme for Kagi Search by Visnes
+ *                                            https://github.com/Visnes/kagi-liquid-glass
+ *                       https://openkagi.com/themes/mac-os-liquid-glass-auto-light-darks
+ */
+
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
 
 :root {
-  --wallpaper-light: url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/d7afddd25628b2791ee45499b338b9c1cbd0a7bb/bg/tahoe-light.webp");
-  --wallpaper-dark:  url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/refs/heads/main/bg/tahoe-dark.webp");
+  --wallpaper-light: url("https://visnes.org/dump/tahoe-light.webp");
+  --wallpaper-dark:  url("https://visnes.org/dump/tahoe-dark.webp");
 }
 
 :root {
@@ -95,10 +107,14 @@ body {
     background-repeat:   no-repeat;
     background-attachment: fixed;
   }
+  
   body:has(.doggo_sit_a) {
-    background-image:    url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/d7afddd25628b2791ee45499b338b9c1cbd0a7bb/bg/tahoe-light.webp"), linear-gradient(145deg, #e8ecf4 0%, #dde5f0 40%, #e4dff2 100%);
-    background-size:     cover, auto;
-    background-position: center, top;
+    background-color: #2e8bcc;
+    background-image:
+      radial-gradient(135% 90% at 50% -10%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 55%),
+      linear-gradient(165deg, #84b4c2 0%, #6ba0bd 24%, #2e8bcc 52%, #0b70d0 78%, #2a64a8 100%);
+    background-size:     cover, cover;
+    background-position: center, center;
     background-repeat:   no-repeat, no-repeat;
     background-attachment: fixed, fixed;
   }
@@ -113,10 +129,14 @@ body {
     background-repeat:   no-repeat;
     background-attachment: fixed;
   }
+  
   body:has(.doggo_sit_a) {
-    background-image:    url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/refs/heads/main/bg/tahoe-dark.webp"), linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
-    background-size:     cover, auto;
-    background-position: center, top;
+    background-color: #1e44a8;
+    background-image:
+      radial-gradient(135% 90% at 50% -10%, rgba(120,150,255,0.20) 0%, rgba(10,12,40,0) 55%),
+      linear-gradient(165deg, #2a2bb6 0%, #2f38b8 26%, #1e44a8 56%, #0b379c 82%, #233b8f 100%);
+    background-size:     cover, cover;
+    background-position: center, center;
     background-repeat:   no-repeat, no-repeat;
     background-attachment: fixed, fixed;
   }
@@ -774,7 +794,7 @@ background:
 }
 
 .copyright::after {
-  content: "Â© Visnes. Themenize the Kagi.";
+  content: "© Visnes. Themenize the Kagi.";
 }
 
 @media (max-width: 600px) {
@@ -795,10 +815,6 @@ body {
   }
   body:has(.doggo_sit_a) {
     background-attachment: scroll;
-  }
-
-body:has(.doggo_sit_a) {
-    background-position: top, top;
   }
 
 .a-w {
@@ -951,7 +967,7 @@ body:has(.doggo_sit_a) .s-f-w.--active {
   }
 
   .main-footer::after {
-    content: "Â© Kagi. Humanize the Web.\AÂ© Visnes. Themenize the Kagi.";
+    content: "© Kagi. Humanize the Web.\A© Visnes. Themenize the Kagi.";
     font-size: 0.7rem;
     display: block;
     text-align: center;
@@ -978,18 +994,14 @@ body:has(.doggo_sit_a) .s-f-w.--active {
   }
 }
 
-@media (pointer: coarse) {
+@media (pointer: coarse), (hover: none) {
   body {
     background-attachment: scroll;
   }
   body:has(.doggo_sit_a) {
     background-attachment: scroll;
-    background-position: top, top;
   }
 
-}
-
-@media (pointer: coarse), (hover: none) {
   .landing_cat_buttons > button.--active {
     color: #ffffff !important;
     background: linear-gradient(
@@ -1001,5 +1013,9 @@ body:has(.doggo_sit_a) .s-f-w.--active {
     box-shadow:
       inset 1px 1px 0px rgba(255, 255, 255, 0.55),
       var(--btn-blue-shadow) !important;
+  }
+
+.landing_cat_buttons {
+    overflow-y: visible !important;
   }
 }
