@@ -25,28 +25,34 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
- * GLASS OPACITY — the only value you need to tune.
+ * GLASS TUNING — the two values you need to adjust.
  *
- *   0.05  → crystal-clear glass  (best with colourful OS wallpapers)
- *   0.12  → light frost          ← recommended default
- *   0.25  → medium frost         (good for light / plain backgrounds)
- *   0.50  → heavy frost          (near-opaque panels)
+ * --glass-opacity   controls panel tint density
+ *   0.05  → crystal-clear glass  (best with colourful wallpapers)
+ *   0.12  → light frost          ← default
+ *   0.25  → medium frost
+ *   0.50  → heavy frost / near-opaque
+ *   Dark mode panels automatically add +0.32.
  *
- * Dark mode panels are automatically scaled to remain visible at low values.
+ * --blur-radius   controls frosted-glass blur depth
+ *   2px   → barely-there haze   (almost see-through)
+ *   6px   → light frost         ← default
+ *   12px  → medium frost        (classic frosted glass)
+ *   28px  → heavy blur          (everything behind blends to one colour)
  * ════════════════════════════════════════════════════════════════════════════ */
 :root {
   --glass-opacity: 0.12;
+  --blur-radius:   6px;
 
   /* ── Derived glass tints ── */
   --glass-bg-light: rgba(255, 255, 255, var(--glass-opacity));
   --glass-bg-dark:  rgba(22, 22, 30,  calc(var(--glass-opacity) + 0.32));
 
-  /* ── Glass blur chain — applied directly to every glass element ──
-     blur(28px)     : frosted-glass base
-     saturate(240%) : punchy colour through the glass (key for liquid glass look)
-     brightness(1.06): slight lightening to simulate refraction
-     contrast(1.04) : keeps colours from washing out                           */
-  --glass-blur:    blur(28px) saturate(240%) brightness(1.06) contrast(1.04);
+  /* ── Glass blur chain ──
+     Saturation at 140% adds colour punch without a blue cast.
+     High saturation (240%+) works at large blur radii where colours blend
+     to near-white anyway, but at small radii it over-saturates visibly. */
+  --glass-blur: blur(var(--blur-radius)) saturate(140%) brightness(1.04) contrast(1.02);
 
   /* ── Rim highlights — the defining Liquid Glass chrome edge ── */
   --glass-rim-light:
@@ -156,7 +162,7 @@ body {
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #0f101a;
-    background-image:    linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
+    background-image:    linear-gradient(145deg, #0f101a 0%, #12131f 50%, #21243b 100%);
     background-size:     auto;
     background-position: top;
     background-repeat:   no-repeat;
@@ -182,17 +188,48 @@ hr {
   body:has(.doggo_sit_a) {
     color: rgba(255, 255, 255, 0.92);
   }
-  body:has(.doggo_sit_a) .suggestions_area,
-  body:has(.doggo_sit_a) .auto_suggestions,
   body:has(.doggo_sit_a) input,
   body:has(.doggo_sit_a) textarea {
-    color: var(--text-light) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  body:has(.doggo_sit_a) ._0_search-input-container input::placeholder,
+  body:has(.doggo_sit_a) .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.55) !important;
   }
   body:has(.doggo_sit_a) .flex.flex-wrap.justify-center.fs-13,
   body:has(.doggo_sit_a) .flex.flex-wrap.justify-center.fs-13 a,
   body:has(.doggo_sit_a) .landing_cat_buttons .btn-search,
   body:has(.doggo_sit_a) .landing_cat_buttons .nav-item,
-  body:has(.doggo_sit_a) .menu-advanced-search-toggle {
+  body:has(.doggo_sit_a) .menu-advanced-search-toggle,
+  body:has(.doggo_sit_a) .c-p,
+  body:has(.doggo_sit_a) .logo,
+  body:has(.doggo_sit_a) footer ul li,
+  body:has(.doggo_sit_a) footer ul li a {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  body:has(.doggo_sit_a) .quick-settings .description {
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  /* Kagi explicitly sets color:var(--primary) on these — override for the wallpaper homepage.
+     Panel stays light glass; wallpaper visible through the 12% tint provides contrast. */
+  body:has(.doggo_sit_a) .quick-settings a,
+  body:has(.doggo_sit_a) .quick-settings .d,
+  body:has(.doggo_sit_a) .quick-settings .description,
+  body:has(.doggo_sit_a) .quick-settings .t,
+  body:has(.doggo_sit_a) .quick-settings .quick-settings-header__title,
+  body:has(.doggo_sit_a) .quick-settings-header #quickSettingsCloseBtn,
+  body:has(.doggo_sit_a) .control-center-btn {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  body:has(.doggo_sit_a) .quick-settings a:hover {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+  body:has(.doggo_sit_a) .quick-settings .qc-sec {
+    border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  /* Theme switcher labels use color:var(--text) = dark; override for homepage */
+  body:has(.doggo_sit_a) ._0_app_theme_switch_box > label {
     color: rgba(255, 255, 255, 0.92) !important;
   }
 }
@@ -210,6 +247,10 @@ label:hover {
 
 a.nav-item-link.--active {
   color: var(--blue) !important;
+}
+
+.land_adv_search_btn {
+  color: #fff;
 }
 
 
@@ -294,6 +335,32 @@ header::before {
   border-bottom: 0;
 }
 
+/* Kagi sets z-index:49 on .landing-category-select, which creates a stacking context.
+   In Chromium, transparent stacking contexts adjacent to backdrop-filter elements
+   produce a visible frosted compositing artifact. Neutralise the stacking context —
+   the category bar doesn't need to out-stack anything on the homepage. */
+.landing-category-select {
+  z-index: auto !important;
+}
+
+/* Active category button — global (covers mobile, tablet, desktop).
+   Kagi's yellow rule has no !important so ours always wins. */
+.landing-category-select .landing_cat_buttons > button.--active,
+.landing_cat_buttons > button.--active {
+  color: #ffffff !important;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 132, 255, 0.92) 0%,
+    rgba(0, 122, 255, 0.88) 50%,
+    rgba(0, 100, 220, 0.92) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.30) !important;
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    inset 0 0 4px 1px rgba(255, 255, 255, 0.25),
+    var(--btn-blue-shadow) !important;
+}
+
 
 /* ════════════════════════════════════════════════════════
  * Search bar & Suggestions
@@ -308,18 +375,12 @@ header::before {
 }
 
 .auto_suggestions {
-  background: rgba(255, 255, 255, 0.50) !important;
-  -webkit-backdrop-filter: blur(36px) saturate(260%) brightness(1.08) contrast(1.05) !important;
-          backdrop-filter: blur(36px) saturate(260%) brightness(1.08) contrast(1.05) !important;
+  background: var(--glass-bg) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+          backdrop-filter: var(--glass-blur) !important;
   border: 1px solid var(--glass-border) !important;
   border-radius: 0 0 24px 24px !important;
   box-shadow: var(--glass-rim), var(--glass-shadow) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .auto_suggestions {
-    background: rgba(22, 22, 30, 0.72) !important;
-  }
 }
 
 .suggestions_area {
@@ -346,11 +407,11 @@ header::before {
   margin-left: 0.75em;
 }
 
+/* DO NOT add backdrop-filter here — .search-form is an ancestor of .auto_suggestions,
+   so any backdrop-filter on it creates an isolation group that blocks the suggestions blur. */
 .search-form:focus-within {
   box-shadow: none !important;
   filter: none !important;
-  /* backdrop-filter: none !important; */
-  backdrop-filter: blur(3px) !important;
 }
 
 /* The variable chain --color-search-input → --input-bg → --primary-50 → --chrome-900
@@ -360,6 +421,22 @@ header::before {
 ._0_search-input-container {
   background: transparent !important;
   border: 1px solid var(--glass-border) !important;
+}
+
+/* Glass blur on the search box — homepage only.
+   Uses ::after (z-index:-1) so it does NOT create an isolation group for children.
+   .auto_suggestions is a sibling of this container (not inside it), so no risk there.
+   On the results page the header's own ::after already provides the glass layer. */
+body:has(.doggo_sit_a) ._0_search-input-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .search-input-container input,
@@ -396,8 +473,27 @@ header::before {
   z-index: 10000 !important;
 }
 
+.quick-settings {
+  background: var(--glass-bg) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border-left: 1px solid var(--glass-border) !important;
+}
+
 .advanced-search-modal-backdrop {
   z-index: 99999 !important;
+}
+
+/* Kagi's scrim uses --graphite-900 (near-black) at opacity 0.7 regardless of theme.
+   Override to white in light mode so it dims without going dark. */
+.advanced-search-modal-backdrop::before {
+  background-color: #ffffff !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .advanced-search-modal-backdrop::before {
+    background-color: #000000 !important;
+  }
 }
 
 .advanced-search-modal {
@@ -525,6 +621,14 @@ header::before {
 body > div.app-content-box.top-panel-box {
   position: relative;
   z-index: 2;
+  background: transparent !important;
+}
+
+/* Kagi's ::after extends 30px of solid app-bg below the filter bar,
+   which would be the surface backdrop-filter blurs — clear it so .dd-list
+   blurs actual result content, not an opaque cover. */
+body > div.app-content-box.top-panel-box::after {
+  background: transparent !important;
 }
 
 /* Dropdowns need:
@@ -593,7 +697,7 @@ body > div.app-content-box.top-panel-box {
   cursor: pointer;
   color: #ffffff;
   outline: none;
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  /* border: 1px solid rgba(255, 255, 255, 0.30); */
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -677,20 +781,33 @@ body > div.app-content-box.top-panel-box {
  * Filter Items (search-type pills: Images, Videos, …)
  * ════════════════════════════════════════════════════════ */
 
+/* NEVER put backdrop-filter directly on .filter-item — it is the parent of .dd-list,
+   so a direct backdrop-filter creates an isolation group that blocks .dd-list's own blur.
+   Glass effect lives on ::after at z-index: -1 instead (same pattern as .app-header). */
 .filter-item {
   border-radius: 9999px;
   border: 1px solid var(--glass-border);
   position: relative;
   cursor: pointer;
   outline: none;
-  background: var(--btn-glass-bg);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  backdrop-filter: blur(12px) saturate(180%);
+  background: transparent;
   box-shadow:
     inset 1px 1px 0px rgba(255, 255, 255, 0.65),
     inset 0 0 3px rgba(255, 255, 255, 0.25),
     0 2px 8px rgba(0, 0, 0, 0.10);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  background: var(--btn-glass-bg);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .filter-item:hover {
@@ -714,6 +831,34 @@ body > div.app-content-box.top-panel-box {
 
 ._0_lenses.filter-item {
   all: unset;
+}
+
+/* NEVER put backdrop-filter directly on .k_ui_dropdown.__basic — same rule as
+   .filter-item: its child .k_ui_dropdown_data_list has backdrop-filter, so a
+   direct backdrop-filter here would create an isolation group blocking the popup blur. */
+.k_ui_dropdown.__basic {
+  background: transparent !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px;
+  position: relative;
+}
+
+.k_ui_dropdown.__basic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  background: var(--btn-glass-bg);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure the trigger label renders above the ::after glass layer */
+.k_ui_dropdown.__basic .k_ui_dropdown_first_item {
+  position: relative;
+  z-index: 1;
 }
 
 
@@ -744,9 +889,27 @@ body > div.app-content-box.top-panel-box {
     var(--btn-blue-shadow) !important;
 }
 
+/* OFF state bar — gray tint so the track is visible (Kagi defaults to white) */
+.k_ui_toggle_switch_bar,
+._0_lensToggler {
+  background: rgba(120, 120, 128, 0.24) !important;
+  border-color: rgba(120, 120, 128, 0.36) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .k_ui_toggle_switch_bar,
+  ._0_lensToggler {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+}
+
+/* Knob — white with shadow; visible on the gray OFF track and the blue ON track */
 .k_ui_toggle_switch_bar::after,
 ._0_lensToggler::after {
+  background-color: #ffffff !important;
   border: none !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30) !important;
 }
 
 .k_ui_toggle_switch input:checked:hover ~ .k_ui_toggle_switch_bar,
@@ -764,6 +927,26 @@ body > div.app-content-box.top-panel-box {
     0 2px 10px rgba(0, 0, 0, 0.12),
     0 0 8px rgba(var(--blue-rgb), 0.20);
   transition: box-shadow 0.2s ease-in-out;
+}
+
+
+/* ════════════════════════════════════════════════════════
+ * Theme Switcher (Control Center)
+ * ════════════════════════════════════════════════════════ */
+
+._0_app_theme_switch_box > label {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+._0_app_theme_switch_box > input:checked + label {
+  background: var(--btn-glass-bg) !important;
+  border-color: rgba(255, 255, 255, 0.50) !important;
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    inset 0 0 4px rgba(255, 255, 255, 0.20) !important;
 }
 
 
@@ -818,9 +1001,16 @@ body > div.app-content-box.top-panel-box {
     display: none;
   }
 
-  .content-area,
-  .mob {
+  .content-area {
     background: transparent !important;
+  }
+
+  /* background-attachment:fixed is unsupported on iOS Safari and many Android browsers —
+     the wallpaper simply doesn't render. Override both body and the higher-specificity
+     homepage selector so the wallpaper actually shows on real devices. */
+  body,
+  body:has(.doggo_sit_a) {
+    background-attachment: scroll;
   }
 
   .a-w {
@@ -832,19 +1022,57 @@ body > div.app-content-box.top-panel-box {
     background: none !important;
   }
 
+  /* .m-h contains .auto_suggestions on mobile results page — direct backdrop-filter
+     would create an isolation group blocking the suggestions blur. Use ::after instead. */
   .m-h {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 99;
-    padding: 1em;
+    background: transparent;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-rim), 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .m-h::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.70) 25%,
+      rgba(255, 255, 255, 0.95) 50%,
+      rgba(255, 255, 255, 0.70) 75%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .m-h::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Mobile homepage header (.h-w) — no .auto_suggestions inside, safe for direct backdrop-filter */
+  .h-w {
     background: var(--glass-bg);
     -webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: var(--glass-rim), 0 4px 16px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-rim), 0 2px 8px rgba(0, 0, 0, 0.10);
+    padding: 8px 12px;
+    margin: 20px 0 0 0;
   }
 
   .top-nav {
@@ -852,21 +1080,35 @@ body > div.app-content-box.top-panel-box {
     z-index: 1;
   }
 
-  .quick-settings,
-  .quick-settings-footer {
+  /* Full-screen overlay on mobile — no rounded corners */
+  .quick-settings {
     background: var(--glass-bg) !important;
     -webkit-backdrop-filter: var(--glass-blur) !important;
     backdrop-filter: var(--glass-blur) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 16px !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Footer is inside the panel (which already has backdrop-filter) — no separate glass card.
+     Kagi gives it width:100%, so horizontal margins cause overflow; use border-top instead. */
+  .quick-settings-footer {
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    border-top: 1px solid var(--glass-border) !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .quick-settings.--open {
     z-index: 999 !important;
   }
 
-  .d,
-  .description {
+  /* Only restore dark text on non-homepage pages; homepage uses white text over wallpaper */
+  body:not(:has(.doggo_sit_a)) .d,
+  body:not(:has(.doggo_sit_a)) .description {
     color: var(--text) !important;
   }
 
@@ -874,9 +1116,10 @@ body > div.app-content-box.top-panel-box {
     padding-top: 8vh;
   }
 
-  header,
-  .top-bar,
-  .spt {
+  /* header selector removed — on mobile there is no <header> element, but leaving it
+     would apply backdrop-filter to header.app-header at narrow desktop widths, creating
+     an isolation group that blocks .auto_suggestions blur. */
+  .top-bar {
     padding: 0.5em;
     background: var(--glass-bg);
     -webkit-backdrop-filter: var(--glass-blur);
@@ -918,12 +1161,23 @@ body > div.app-content-box.top-panel-box {
     border-bottom: 0 !important;
   }
 
+  /* Fullscreen search overlay: transparent so wallpaper (homepage) or results show through.
+     No backdrop-filter here — it would create an isolation group blocking .auto_suggestions. */
   .s-f-w.--active {
-    background: var(--glass-bg) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 12px !important;
+    background: transparent !important;
+    padding-top: 90px;
+  }
+
+  /* Homepage only: push the form down so it clears the .h-w nav/burger header.
+     ~90px = observed header height + breathing room.  Adjust if Kagi changes the header. */
+  body:has(.doggo_sit_a) .s-f-w.--active {
+    padding-top: 90px;
+  }
+
+  /* Square the top corners of suggestions when they're inside the fullscreen overlay so they
+     look flush with the search field above (mobile general rule gives them 14px all around). */
+  .s-f-w.--active .auto_suggestions {
+    border-radius: 0 0 24px 24px !important;
   }
 
   .main-footer::after {
