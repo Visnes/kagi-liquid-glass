@@ -349,7 +349,8 @@ header::before {
 .search-form:focus-within {
   box-shadow: none !important;
   filter: none !important;
-  backdrop-filter: none !important;
+  /* backdrop-filter: none !important; */
+  backdrop-filter: blur(3px) !important;
 }
 
 /* The variable chain --color-search-input → --input-bg → --primary-50 → --chrome-900
@@ -516,6 +517,15 @@ header::before {
 /* ════════════════════════════════════════════════════════
  * Dropdowns & Lists
  * ════════════════════════════════════════════════════════ */
+
+/* The filter bar (lens, region, etc.) sits between the header and results.
+   Its .dd-list dropdowns extend into the results area and must paint above it.
+   z-index: 2 creates a stacking context so the whole panel (overflowing dropdowns
+   included) beats the results area (z-index: auto) without fighting the header (9999). */
+body > div.app-content-box.top-panel-box {
+  position: relative;
+  z-index: 2;
+}
 
 /* Dropdowns need:
    - high z-index so they float above search results
