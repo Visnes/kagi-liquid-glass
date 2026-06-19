@@ -1,90 +1,43 @@
-/*
- *  ██╗     ██╗ ██████╗ ██╗   ██╗██╗██████╗      ██████╗ ██╗      █████╗ ███████╗███████╗
- *  ██║     ██║██╔═══██╗██║   ██║██║██╔══██╗    ██╔════╝ ██║     ██╔══██╗██╔════╝██╔════╝
- *  ██║     ██║██║   ██║██║   ██║██║██║  ██║    ██║  ███╗██║     ███████║███████╗███████╗
- *  ██║     ██║██║▄▄ ██║██║   ██║██║██║  ██║    ██║   ██║██║     ██╔══██║╚════██║╚════██║
- *  ███████╗██║╚██████╔╝╚██████╔╝██║██████╔╝    ╚██████╔╝███████╗██║  ██║███████║███████║
- *  ╚══════╝╚═╝ ╚══▀▀═╝  ╚═════╝ ╚═╝╚═════╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝
- *                                           Liquid Glass Theme for Kagi Search by Visnes
- *                                                   https://github.com/Visnes/kagi-theme
- *                                               https://openkagi.com/themes/liquid-glass
- */
+﻿@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
 
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
-
-/* ════════════════════════════════════════════════════════════════════════════
- * WALLPAPER (optional — Kagi home page only)
- *
- * The wallpaper applies only on the Kagi home page (body:has(.app-box-center)).
- * On search-result pages the gradient background shows instead.
- * Set either variable to  none  to disable that colour-scheme variant.
- * ════════════════════════════════════════════════════════════════════════════ */
 :root {
   --wallpaper-light: url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/d7afddd25628b2791ee45499b338b9c1cbd0a7bb/bg/tahoe-light.webp");
   --wallpaper-dark:  url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/refs/heads/main/bg/tahoe-dark.webp");
 }
 
-/* ════════════════════════════════════════════════════════════════════════════
- * GLASS TUNING — the two values you need to adjust.
- *
- * --glass-opacity   controls panel tint density
- *   0.05  → crystal-clear glass  (best with colourful wallpapers)
- *   0.12  → light frost          ← default
- *   0.25  → medium frost
- *   0.50  → heavy frost / near-opaque
- *   Dark mode panels automatically add +0.32.
- *
- * --blur-radius   controls frosted-glass blur depth
- *   2px   → barely-there haze   (almost see-through)
- *   6px   → light frost         ← default
- *   12px  → medium frost        (classic frosted glass)
- *   28px  → heavy blur          (everything behind blends to one colour)
- * ════════════════════════════════════════════════════════════════════════════ */
 :root {
   --glass-opacity: 0.12;
   --blur-radius:   6px;
 
-  /* ── Derived glass tints ── */
-  --glass-bg-light: rgba(255, 255, 255, var(--glass-opacity));
+--glass-bg-light: rgba(255, 255, 255, var(--glass-opacity));
   --glass-bg-dark:  rgba(22, 22, 30,  calc(var(--glass-opacity) + 0.32));
 
-  /* ── Glass blur chain ──
-     Saturation at 140% adds colour punch without a blue cast.
-     High saturation (240%+) works at large blur radii where colours blend
-     to near-white anyway, but at small radii it over-saturates visibly. */
-  --glass-blur: blur(var(--blur-radius)) saturate(140%) brightness(1.04) contrast(1.02);
+--glass-blur: blur(var(--blur-radius)) saturate(140%) brightness(1.04) contrast(1.02);
 
-  /* ── Rim highlights — the defining Liquid Glass chrome edge ── */
-  --glass-rim-light:
+--glass-rim-light:
     inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.90),
     inset 0 0 6px 1px  rgba(255, 255, 255, 0.50);
   --glass-rim-dark:
     inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.28),
     inset 0 0 6px 1px  rgba(255, 255, 255, 0.12);
 
-  /* ── Border stroke ── */
-  --glass-border-light: rgba(255, 255, 255, 0.40);
+--glass-border-light: rgba(255, 255, 255, 0.40);
   --glass-border-dark:  rgba(255, 255, 255, 0.14);
 
-  /* ── Outer drop-shadow ── */
-  --glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+--glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
   --glass-shadow-dark:  0 8px 32px rgba(0, 0, 0, 0.50), 0 2px 8px rgba(0, 0, 0, 0.28);
 
-  /* ── System accent ── */
-  --blue:     #007AFF;
+--blue:     #007AFF;
   --blue-rgb: 0, 122, 255;
 
-  /* ── Text ── */
-  --text-light: rgba(0, 0, 0, 0.85);
+--text-light: rgba(0, 0, 0, 0.85);
   --text-dark:  rgba(255, 255, 255, 0.92);
   --text-font:  -apple-system, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
 
-  /* ── Page backgrounds ── */
-  --bg-light: #e8ecf2;
+--bg-light: #e8ecf2;
   --bg-dark:  #0f101a;
 
-  /* ── Buttons ── */
-  --btn-glass-bg-light: rgba(255, 255, 255, 0.28);
+--btn-glass-bg-light: rgba(255, 255, 255, 0.28);
   --btn-glass-bg-dark:  rgba(255, 255, 255, 0.08);
   --btn-blue-shadow:
     0 4px 20px rgba(var(--blue-rgb), 0.40),
@@ -93,8 +46,7 @@
     0 6px 28px rgba(var(--blue-rgb), 0.55),
     0 2px 8px  rgba(0, 0, 0, 0.25);
 
-  /* ── Active-mode defaults (light) ── */
-  --bg:           var(--bg-light);
+--bg:           var(--bg-light);
   --text:         var(--text-light);
   --glass-bg:     var(--glass-bg-light);
   --glass-border: var(--glass-border-light);
@@ -127,11 +79,6 @@
   }
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Base
- * ════════════════════════════════════════════════════════ */
-
 body {
   font-family: var(--text-font);
   color: var(--text);
@@ -139,8 +86,6 @@ body {
   background-attachment: fixed;
 }
 
-/* Base body gets the gradient only. The wallpaper is added as a first layer
-   on the home page only (identified by .app-box-center, present only there). */
 @media (prefers-color-scheme: light) {
   body {
     background-color: #e4e8f0;
@@ -151,7 +96,7 @@ body {
     background-attachment: fixed;
   }
   body:has(.doggo_sit_a) {
-    background-image:    var(--wallpaper-light), linear-gradient(145deg, #e8ecf4 0%, #dde5f0 40%, #e4dff2 100%);
+    background-image:    url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/d7afddd25628b2791ee45499b338b9c1cbd0a7bb/bg/tahoe-light.webp"), linear-gradient(145deg, #e8ecf4 0%, #dde5f0 40%, #e4dff2 100%);
     background-size:     cover, auto;
     background-position: center, top;
     background-repeat:   no-repeat, no-repeat;
@@ -169,7 +114,7 @@ body {
     background-attachment: fixed;
   }
   body:has(.doggo_sit_a) {
-    background-image:    var(--wallpaper-dark), linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
+    background-image:    url("https://raw.githubusercontent.com/Visnes/kagi-liquid-glass/refs/heads/main/bg/tahoe-dark.webp"), linear-gradient(145deg, #0f101a 0%, #12131f 50%, #0c0e18 100%);
     background-size:     cover, auto;
     background-position: center, top;
     background-repeat:   no-repeat, no-repeat;
@@ -181,9 +126,6 @@ hr {
   display: none;
 }
 
-/* Home page in light mode: text that falls directly over the wallpaper must be
-   white — dark text on a nature photo is unreadable. Restore dark inside the
-   glass panels (search area, inputs) where the frosted backing provides contrast. */
 @media (prefers-color-scheme: light) {
   body:has(.doggo_sit_a) {
     color: rgba(255, 255, 255, 0.92);
@@ -211,9 +153,7 @@ hr {
     color: rgba(255, 255, 255, 0.55) !important;
   }
 
-  /* Kagi explicitly sets color:var(--primary) on these — override for the wallpaper homepage.
-     Panel stays light glass; wallpaper visible through the 12% tint provides contrast. */
-  body:has(.doggo_sit_a) .quick-settings a,
+body:has(.doggo_sit_a) .quick-settings a,
   body:has(.doggo_sit_a) .quick-settings .d,
   body:has(.doggo_sit_a) .quick-settings .description,
   body:has(.doggo_sit_a) .quick-settings .t,
@@ -228,7 +168,7 @@ hr {
   body:has(.doggo_sit_a) .quick-settings .qc-sec {
     border-bottom-color: rgba(255, 255, 255, 0.12) !important;
   }
-  /* Theme switcher labels use color:var(--text) = dark; override for homepage */
+  
   body:has(.doggo_sit_a) ._0_app_theme_switch_box > label {
     color: rgba(255, 255, 255, 0.92) !important;
   }
@@ -253,11 +193,6 @@ a.nav-item-link.--active {
   color: #fff;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Header
- * ════════════════════════════════════════════════════════ */
-
 .app-header {
   display: flex;
   justify-content: flex-start;
@@ -269,16 +204,11 @@ a.nav-item-link.--active {
   width: 100%;
   z-index: 9999;
 
-  /* backdrop-filter lives on ::after, NOT here. Putting it directly on .app-header
-     creates an isolation group — child backdrop-filters (e.g. .auto_suggestions)
-     would then blur only the header's composite, not actual page content. */
-  background: transparent;
+background: transparent;
   border-bottom: 1px solid var(--glass-border);
   box-shadow: var(--glass-rim), 0 4px 24px rgba(0, 0, 0, 0.10);
 }
 
-/* Frosted-glass backdrop on ::after so the header itself doesn't create an isolation group,
-   allowing .auto_suggestions (a child) to blur actual page content on the results page. */
 .app-header::after {
   content: "";
   position: absolute;
@@ -290,7 +220,6 @@ a.nav-item-link.--active {
   pointer-events: none;
 }
 
-/* Shimmer line along the top edge */
 .app-header::before,
 header::before {
   content: "";
@@ -325,50 +254,15 @@ header::before {
   top: 10px;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Navigation
- * ════════════════════════════════════════════════════════ */
-
 .app-nav,
 .landing_cat_buttons {
   border-bottom: 0;
 }
 
-/* Kagi sets z-index:49 on .landing-category-select, which creates a stacking context.
-   In Chromium, transparent stacking contexts adjacent to backdrop-filter elements
-   produce a visible frosted compositing artifact. Neutralise the stacking context —
-   the category bar doesn't need to out-stack anything on the homepage. */
 .landing-category-select {
   z-index: auto !important;
 }
 
-/* Active category button — global (covers mobile, tablet, desktop).
-   Kagi's yellow rule has no !important so ours always wins. */
-.landing-category-select .landing_cat_buttons > button.--active,
-.landing_cat_buttons > button.--active {
-  color: #ffffff !important;
-  background: linear-gradient(
-    160deg,
-    rgba(10, 132, 255, 0.92) 0%,
-    rgba(0, 122, 255, 0.88) 50%,
-    rgba(0, 100, 220, 0.92) 100%
-  ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.30) !important;
-  box-shadow:
-    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
-    inset 0 0 4px 1px rgba(255, 255, 255, 0.25),
-    var(--btn-blue-shadow) !important;
-}
-
-
-/* ════════════════════════════════════════════════════════
- * Search bar & Suggestions
- * ════════════════════════════════════════════════════════ */
-
-/* backdrop-filter on .auto_suggestions (outer), not .suggestions_area (child) —
-   Kagi's overflow:hidden would block a child's backdrop-filter in Chromium,
-   but applying it to the outer element itself is unaffected. */
 .auto_suggestions--visible,
 .auto_suggestions {
   z-index: 10000 !important;
@@ -407,26 +301,17 @@ header::before {
   margin-left: 0.75em;
 }
 
-/* DO NOT add backdrop-filter here — .search-form is an ancestor of .auto_suggestions,
-   so any backdrop-filter on it creates an isolation group that blocks the suggestions blur. */
 .search-form:focus-within {
   box-shadow: none !important;
   filter: none !important;
 }
 
-/* The variable chain --color-search-input → --input-bg → --primary-50 → --chrome-900
-   only reaches the container. The inner <input> element has its own background (the
-   "second background"), so both layers need explicit transparent overrides. */
 .search-input-container,
 ._0_search-input-container {
   background: transparent !important;
   border: 1px solid var(--glass-border) !important;
 }
 
-/* Glass blur on the search box — homepage only.
-   Uses ::after (z-index:-1) so it does NOT create an isolation group for children.
-   .auto_suggestions is a sibling of this container (not inside it), so no risk there.
-   On the results page the header's own ::after already provides the glass layer. */
 body:has(.doggo_sit_a) ._0_search-input-container::after {
   content: "";
   position: absolute;
@@ -464,11 +349,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   }
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Modals & Overlays
- * ════════════════════════════════════════════════════════ */
-
 #quickSettings {
   z-index: 10000 !important;
 }
@@ -484,8 +364,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   z-index: 99999 !important;
 }
 
-/* Kagi's scrim uses --graphite-900 (near-black) at opacity 0.7 regardless of theme.
-   Override to white in light mode so it dims without going dark. */
 .advanced-search-modal-backdrop::before {
   background-color: #ffffff !important;
 }
@@ -505,7 +383,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   box-shadow: var(--glass-rim), var(--glass-shadow) !important;
 }
 
-/* .input is a wrapper <div> — style it like the search input container */
 .advanced-search-modal .input {
   background: rgba(255, 255, 255, 0.14) !important;
   border: 1px solid var(--glass-border) !important;
@@ -524,7 +401,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   }
 }
 
-/* Beat Kagi's global input:where(:not([type=checkbox],[type=radio])){ background-color: var(--input-bg) } */
 .advanced-search-modal .input input,
 .advanced-search-modal .input textarea,
 .advanced-search-modal .input select,
@@ -553,11 +429,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   }
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Content Areas
- * ════════════════════════════════════════════════════════ */
-
 .body-content {
   background: transparent;
 }
@@ -566,9 +437,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   padding-top: 180px;
 }
 
-/* No backdrop-filter on .scene — it would create a stacking context that traps
-   child dropdown z-indexes, causing menus to render behind sibling result cards.
-   Use a more opaque solid tint instead (same reasoning as .app-box-center in aqua). */
 .scene {
   background: rgba(255, 255, 255, 0.45) !important;
   border: 1px solid var(--glass-border) !important;
@@ -583,10 +451,6 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   }
 }
 
-/* When a dropdown is open inside a result card, lift that card above its siblings.
-   Cards sit at z-index:auto by default; z-index:1 here beats that so the card
-   (and its overflowing dropdown) paints AFTER later DOM siblings.
-   .scene — used for visual/knowledge cards; .sri-group / ._0_SRI.search-result — regular text results. */
 .scene:has(._0_k_ui_dropdown_data_list),
 .scene:has(._0_k_ui_data_list),
 .scene:has(._0_more_search_box),
@@ -609,36 +473,16 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
   z-index: 1;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Dropdowns & Lists
- * ════════════════════════════════════════════════════════ */
-
-/* The filter bar (lens, region, etc.) sits between the header and results.
-   Its .dd-list dropdowns extend into the results area and must paint above it.
-   z-index: 2 creates a stacking context so the whole panel (overflowing dropdowns
-   included) beats the results area (z-index: auto) without fighting the header (9999). */
 body > div.app-content-box.top-panel-box {
   position: relative;
   z-index: 2;
   background: transparent !important;
 }
 
-/* Kagi's ::after extends 30px of solid app-bg below the filter bar,
-   which would be the surface backdrop-filter blurs — clear it so .dd-list
-   blurs actual result content, not an opaque cover. */
 body > div.app-content-box.top-panel-box::after {
   background: transparent !important;
 }
 
-/* Dropdowns need:
-   - high z-index so they float above search results
-     (backdrop-filter creates a new stacking context, resetting z-order)
-   - a solid opaque background — backdrop-filter blur does NOT render on children
-     of a backdrop-filter parent in Chromium; solid ~95% opacity is the right fallback
-     (macOS also uses ~88–95% opacity on menus, not clear glass)
-   The .scene:has(...) rule lifts the card containing an open dropdown above
-   its siblings, preventing later DOM cards from painting over the popup. */
 ._0_k_ui_dropdown_data_list,
 ._0_k_ui_data_list,
 ._0_more_search_box,
@@ -646,7 +490,7 @@ body > div.app-content-box.top-panel-box::after {
 .k_ui_data_list,
 .dd-list {
   z-index: 99999 !important;
-  overflow: visible !important; /* Kagi sets overflow:hidden which blocks backdrop-filter in Chromium */
+  overflow: visible !important; 
   background: rgba(238, 241, 248, 0.55) !important;
   -webkit-backdrop-filter: var(--glass-blur) !important;
   backdrop-filter: var(--glass-blur) !important;
@@ -655,7 +499,6 @@ body > div.app-content-box.top-panel-box::after {
   box-shadow: var(--glass-rim), var(--glass-shadow) !important;
   color: rgba(0, 0, 0, 0.85) !important;
 }
-
 
 @media (prefers-color-scheme: dark) {
   ._0_k_ui_dropdown_data_list,
@@ -669,24 +512,10 @@ body > div.app-content-box.top-panel-box::after {
   }
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Shadows
- * ════════════════════════════════════════════════════════ */
-
 .logo,
 .doggo_sit_a {
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
 }
-
-
-/* ════════════════════════════════════════════════════════
- * Buttons
- *
- * Shimmer lives in the multi-layer background — NOT in ::before —
- * so #searchFormSubmit::before { content: "Fetch" } has nothing
- * to fight against and renders clean text.
- * ════════════════════════════════════════════════════════ */
 
 .btn {
   font-family: var(--text-font);
@@ -697,16 +526,12 @@ body > div.app-content-box.top-panel-box::after {
   cursor: pointer;
   color: #ffffff;
   outline: none;
-  /* border: 1px solid rgba(255, 255, 255, 0.30); */
+  
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 
-  /* Three-layer background:
-     1. Top shimmer — specular highlight
-     2. Bottom glow
-     3. Main blue gradient              */
-  background:
+background:
     linear-gradient(to bottom,
       rgba(255, 255, 255, 0.42) 0%,
       rgba(255, 255, 255, 0.00) 52%
@@ -760,7 +585,6 @@ body > div.app-content-box.top-panel-box::after {
     var(--btn-blue-shadow);
 }
 
-/* Fetch button needs explicit sizing since Kagi treats it as a small icon button */
 #searchFormSubmit {
   padding:   0.45em 1.3em !important;
   min-width: 4.5em !important;
@@ -776,14 +600,6 @@ body > div.app-content-box.top-panel-box::after {
   display: none;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Filter Items (search-type pills: Images, Videos, …)
- * ════════════════════════════════════════════════════════ */
-
-/* NEVER put backdrop-filter directly on .filter-item — it is the parent of .dd-list,
-   so a direct backdrop-filter creates an isolation group that blocks .dd-list's own blur.
-   Glass effect lives on ::after at z-index: -1 instead (same pattern as .app-header). */
 .filter-item {
   border-radius: 9999px;
   border: 1px solid var(--glass-border);
@@ -833,9 +649,6 @@ body > div.app-content-box.top-panel-box::after {
   all: unset;
 }
 
-/* NEVER put backdrop-filter directly on .k_ui_dropdown.__basic — same rule as
-   .filter-item: its child .k_ui_dropdown_data_list has backdrop-filter, so a
-   direct backdrop-filter here would create an isolation group blocking the popup blur. */
 .k_ui_dropdown.__basic {
   background: transparent !important;
   border: 1px solid var(--glass-border) !important;
@@ -855,16 +668,10 @@ body > div.app-content-box.top-panel-box::after {
   pointer-events: none;
 }
 
-/* Ensure the trigger label renders above the ::after glass layer */
 .k_ui_dropdown.__basic .k_ui_dropdown_first_item {
   position: relative;
   z-index: 1;
 }
-
-
-/* ════════════════════════════════════════════════════════
- * Toggle Switches
- * ════════════════════════════════════════════════════════ */
 
 .k_ui_toggle_switch input:checked ~ .k_ui_toggle_switch_bar,
 .k_ui_toggle_switch.--enabled .k_ui_toggle_switch_bar,
@@ -889,7 +696,6 @@ body > div.app-content-box.top-panel-box::after {
     var(--btn-blue-shadow) !important;
 }
 
-/* OFF state bar — gray tint so the track is visible (Kagi defaults to white) */
 .k_ui_toggle_switch_bar,
 ._0_lensToggler {
   background: rgba(120, 120, 128, 0.24) !important;
@@ -904,7 +710,6 @@ body > div.app-content-box.top-panel-box::after {
   }
 }
 
-/* Knob — white with shadow; visible on the gray OFF track and the blue ON track */
 .k_ui_toggle_switch_bar::after,
 ._0_lensToggler::after {
   background-color: #ffffff !important;
@@ -929,11 +734,6 @@ body > div.app-content-box.top-panel-box::after {
   transition: box-shadow 0.2s ease-in-out;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Theme Switcher (Control Center)
- * ════════════════════════════════════════════════════════ */
-
 ._0_app_theme_switch_box > label {
   background: var(--glass-bg) !important;
   border-color: var(--glass-border) !important;
@@ -949,11 +749,6 @@ body > div.app-content-box.top-panel-box::after {
     inset 0 0 4px rgba(255, 255, 255, 0.20) !important;
 }
 
-
-/* ════════════════════════════════════════════════════════
- * Tooltips
- * ════════════════════════════════════════════════════════ */
-
 .trigger > .tooltip.top {
   bottom: auto !important;
   top: 100% !important;
@@ -962,11 +757,6 @@ body > div.app-content-box.top-panel-box::after {
   transform: none !important;
   margin-bottom: var(--offset, 10px) !important;
 }
-
-
-/* ════════════════════════════════════════════════════════
- * Footer
- * ════════════════════════════════════════════════════════ */
 
 .main-footer {
   background: var(--glass-bg);
@@ -979,18 +769,13 @@ body > div.app-content-box.top-panel-box::after {
 .main-footer a,
 .copyright,
 .copyright::after {
-  /* text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); */
+  
   color: #fff !important;
 }
 
 .copyright::after {
-  content: "© Visnes. Themenize the Kagi.";
+  content: "Â© Visnes. Themenize the Kagi.";
 }
-
-
-/* ════════════════════════════════════════════════════════
- * Mobile Responsive
- * ════════════════════════════════════════════════════════ */
 
 @media (max-width: 600px) {
   body {
@@ -1005,15 +790,18 @@ body > div.app-content-box.top-panel-box::after {
     background: transparent !important;
   }
 
-  /* background-attachment:fixed is unsupported on iOS Safari and many Android browsers —
-     the wallpaper simply doesn't render. Override both body and the higher-specificity
-     homepage selector so the wallpaper actually shows on real devices. */
-  body,
+body {
+    background-attachment: scroll;
+  }
   body:has(.doggo_sit_a) {
     background-attachment: scroll;
   }
 
-  .a-w {
+body:has(.doggo_sit_a) {
+    background-position: top, top;
+  }
+
+.a-w {
     background: transparent;
   }
 
@@ -1022,9 +810,7 @@ body > div.app-content-box.top-panel-box::after {
     background: none !important;
   }
 
-  /* .m-h contains .auto_suggestions on mobile results page — direct backdrop-filter
-     would create an isolation group blocking the suggestions blur. Use ::after instead. */
-  .m-h {
+.m-h {
     position: fixed;
     top: 0;
     left: 0;
@@ -1063,8 +849,7 @@ body > div.app-content-box.top-panel-box::after {
     pointer-events: none;
   }
 
-  /* Mobile homepage header (.h-w) — no .auto_suggestions inside, safe for direct backdrop-filter */
-  .h-w {
+.h-w {
     background: var(--glass-bg);
     -webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
@@ -1080,8 +865,7 @@ body > div.app-content-box.top-panel-box::after {
     z-index: 1;
   }
 
-  /* Full-screen overlay on mobile — no rounded corners */
-  .quick-settings {
+.quick-settings {
     background: var(--glass-bg) !important;
     -webkit-backdrop-filter: var(--glass-blur) !important;
     backdrop-filter: var(--glass-blur) !important;
@@ -1089,9 +873,7 @@ body > div.app-content-box.top-panel-box::after {
     border-radius: 0 !important;
   }
 
-  /* Footer is inside the panel (which already has backdrop-filter) — no separate glass card.
-     Kagi gives it width:100%, so horizontal margins cause overflow; use border-top instead. */
-  .quick-settings-footer {
+.quick-settings-footer {
     background: transparent !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
@@ -1106,8 +888,7 @@ body > div.app-content-box.top-panel-box::after {
     z-index: 999 !important;
   }
 
-  /* Only restore dark text on non-homepage pages; homepage uses white text over wallpaper */
-  body:not(:has(.doggo_sit_a)) .d,
+body:not(:has(.doggo_sit_a)) .d,
   body:not(:has(.doggo_sit_a)) .description {
     color: var(--text) !important;
   }
@@ -1116,10 +897,7 @@ body > div.app-content-box.top-panel-box::after {
     padding-top: 8vh;
   }
 
-  /* header selector removed — on mobile there is no <header> element, but leaving it
-     would apply backdrop-filter to header.app-header at narrow desktop widths, creating
-     an isolation group that blocks .auto_suggestions blur. */
-  .top-bar {
+.top-bar {
     padding: 0.5em;
     background: var(--glass-bg);
     -webkit-backdrop-filter: var(--glass-blur);
@@ -1128,9 +906,7 @@ body > div.app-content-box.top-panel-box::after {
     z-index: 99;
   }
 
-  /* .app-header keeps the ::after blur approach (same as desktop) to avoid the
-     isolation group that would block .auto_suggestions' backdrop-filter. */
-  .app-header {
+.app-header {
     padding: 0.5em;
     z-index: 99;
   }
@@ -1161,27 +937,21 @@ body > div.app-content-box.top-panel-box::after {
     border-bottom: 0 !important;
   }
 
-  /* Fullscreen search overlay: transparent so wallpaper (homepage) or results show through.
-     No backdrop-filter here — it would create an isolation group blocking .auto_suggestions. */
-  .s-f-w.--active {
+.s-f-w.--active {
     background: transparent !important;
     padding-top: 90px;
   }
 
-  /* Homepage only: push the form down so it clears the .h-w nav/burger header.
-     ~90px = observed header height + breathing room.  Adjust if Kagi changes the header. */
-  body:has(.doggo_sit_a) .s-f-w.--active {
+body:has(.doggo_sit_a) .s-f-w.--active {
     padding-top: 90px;
   }
 
-  /* Square the top corners of suggestions when they're inside the fullscreen overlay so they
-     look flush with the search field above (mobile general rule gives them 14px all around). */
-  .s-f-w.--active .auto_suggestions {
+.s-f-w.--active .auto_suggestions {
     border-radius: 0 0 24px 24px !important;
   }
 
   .main-footer::after {
-    content: "© Kagi. Humanize the Web.\A© Visnes. Themenize the Kagi.";
+    content: "Â© Kagi. Humanize the Web.\AÂ© Visnes. Themenize the Kagi.";
     font-size: 0.7rem;
     display: block;
     text-align: center;
@@ -1205,5 +975,31 @@ body > div.app-content-box.top-panel-box::after {
     padding: 0.5em 20px 0.75em !important;
     overflow-x: auto !important;
     overflow-y: visible !important;
+  }
+}
+
+@media (pointer: coarse) {
+  body {
+    background-attachment: scroll;
+  }
+  body:has(.doggo_sit_a) {
+    background-attachment: scroll;
+    background-position: top, top;
+  }
+
+}
+
+@media (pointer: coarse), (hover: none) {
+  .landing_cat_buttons > button.--active {
+    color: #ffffff !important;
+    background: linear-gradient(
+      160deg,
+      rgba(10, 132, 255, 0.92) 0%,
+      rgba(0, 122, 255, 0.88) 100%
+    ) !important;
+    border: 1px solid rgba(255, 255, 255, 0.30) !important;
+    box-shadow:
+      inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+      var(--btn-blue-shadow) !important;
   }
 }
