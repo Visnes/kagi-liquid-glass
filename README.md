@@ -1,4 +1,4 @@
-## Kagi Liquid Glas custom theme
+## Kagi Liquid Glass custom theme
 
 <img width="1900" height="1080" alt="kagiliquidglass" src="https://github.com/user-attachments/assets/232c8d7d-15d8-4b87-8fa9-b000c9b56e3f" />
 
