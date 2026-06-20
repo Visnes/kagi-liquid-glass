@@ -1,6 +1,6 @@
 ## Kagi Liquid Glas custom theme
 
-<img width="1920" height="1080" alt="kagiliquidglass" src="https://github.com/user-attachments/assets/cf1d876f-793a-4742-8069-46809e4ff630" />
+<img width="1900" height="1080" alt="kagiliquidglass" src="https://github.com/user-attachments/assets/232c8d7d-15d8-4b87-8fa9-b000c9b56e3f" />
 
 A modern and sleek custom theme for Kagi based on liquid glass introduced in Mac OS Tahoe.
 
