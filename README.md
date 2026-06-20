@@ -16,6 +16,15 @@ Settings for how much transparency, the frostiness of the layers etc. can be cha
 
 <img width="1898" height="1080" alt="kagiliquidglassdarklight" src="https://github.com/user-attachments/assets/619b9e04-472c-4dec-9020-bb14fc98b021" />
 
+# Features
+
+- Automatic dark and light mode based on what your system is set to
+- You can configure the opaqueness and more at the top of the file
+- Works perfectly on desktop, tablet and mobile phones
+- It refracts what's behind buttons and panels just like liquid glass (kinda)
+
+<img width="1403" height="247" alt="image" src="https://github.com/user-attachments/assets/3a18ae04-1fc7-42cf-af9d-0efde3758964" />
+
 ## Bug
 - Currently the background images have been removed as they throw a CSP error, so something is blocking it (in talks with Kagi about it)
 
