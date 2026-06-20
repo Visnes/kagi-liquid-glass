@@ -4,6 +4,8 @@
 
 A modern and sleek custom theme for Kagi based on liquid glass introduced in Mac OS Tahoe.
 
+⚠️ **Currently I'm hitting the limit set by Kagi (40,000 characters), that's why I have to minify the file.** ⚠️
+
 This is still being worked on, so there are bugs!
 
 ## Installation
@@ -19,6 +21,7 @@ Settings for how much transparency, the frostiness of the layers etc. can be cha
 # Features
 
 - Automatic dark and light mode based on what your system is set to
+- Most (if not all) of the different modals, divs, buttons etc. have been skinned
 - You can configure the opaqueness and more at the top of the file
 - Works perfectly on desktop, tablet and mobile phones
 - It refracts what's behind buttons and panels just like liquid glass (kinda)
