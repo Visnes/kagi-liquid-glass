@@ -16,3 +16,6 @@ Settings for how much transparency, the frostiness of the layers etc. can be cha
 
 ## Bug
 - Currently the background images have been removed as they throw a CSP error, so something is blocking it (in talks with Kagi about it)
+
+## Aqua
+I've also made a [Kagi theme based on OS X Aqua](https://github.com/Visnes/kagi-theme).
