@@ -13,8 +13,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
 
 :root {
-  --wallpaper-light: url("NOT USED FOR NOW ");
-  --wallpaper-dark:  url("NOT USED FOR NOW");
+  --wallpaper-light: url("NOT IN USE");
+  --wallpaper-dark:  url("NOT IN USE");
 }
 
 :root {
@@ -218,6 +218,14 @@ body:has(.doggo_sit_a) .quick-settings a,
   body:has(.doggo_sit_a) ._0_app_theme_switch_box > label {
     color: rgba(255, 255, 255, 0.92) !important;
   }
+
+body:has(.doggo_sit_a) .auto_suggestions_lenses_box a,
+  body:has(.doggo_sit_a) .auto_item .autoSugArrow,
+  body:has(.doggo_sit_a) .auto_item.highlighted .autoSugArrow,
+  body:has(.doggo_sit_a) .auto_item ._0_suggestion_arrow_mobile,
+  body:has(.doggo_sit_a) .auto_item .preview-image.icEmpty {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
 }
 
 body .overlay-close-event-handler {
@@ -404,6 +412,78 @@ body:has(.doggo_sit_a) ._0_search-input-container::after {
 
 #quickSettings {
   z-index: 10000 !important;
+}
+
+.s-f-w.--active {
+  background: transparent !important;
+  padding-top: 90px;
+}
+.s-f-w.--active .auto_suggestions {
+  border-radius: 0 0 24px 24px !important;
+}
+
+body:not(:has(.doggo_sit_a)):has(.s-f-w.--active) .top-nav {
+  display: none !important;
+}
+
+body:not(:has(.doggo_sit_a)) .s-f-w.--active::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  -webkit-backdrop-filter: blur(30px) saturate(150%) brightness(1.04);
+  backdrop-filter: blur(30px) saturate(150%) brightness(1.04);
+  background: rgba(255, 255, 255, 0.62);
+  z-index: -1;
+  pointer-events: none;
+}
+@media (prefers-color-scheme: dark) {
+  body:not(:has(.doggo_sit_a)) .s-f-w.--active::after {
+    background: rgba(24, 24, 32, 0.68);
+  }
+}
+
+.m-h {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+  background: transparent;
+  border-bottom: 1px solid var(--glass-border);
+  
+  box-shadow: var(--glass-rim-bottom), 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.m-h::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.70) 25%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.70) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.m-h::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: var(--glass-blur-refract);
+  backdrop-filter: var(--glass-blur-refract);
+  filter: var(--glass-distort-header);   
+  background: var(--glass-bg-refract);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.m-app-logo {
+  color: var(--text) !important;
 }
 
 .quick-settings {
@@ -660,6 +740,36 @@ body > div.app-content-box.top-panel-box::after {
   .dd-list {
     background: rgba(24, 24, 34, 0.55) !important;
     color: rgba(255, 255, 255, 0.92) !important;
+  }
+}
+
+.k_ui_dropdown_sort_list_input,
+._0_k_ui_dropdown_sort_list_input {
+  background: rgba(255, 255, 255, 0.14) !important;
+  background-color: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.55),
+    inset 0 0 4px rgba(255, 255, 255, 0.20) !important;
+  color: var(--text) !important;
+}
+.k_ui_dropdown_sort_list_input::placeholder,
+._0_k_ui_dropdown_sort_list_input::placeholder {
+  color: rgba(0, 0, 0, 0.40) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .k_ui_dropdown_sort_list_input,
+  ._0_k_ui_dropdown_sort_list_input {
+    background: rgba(255, 255, 255, 0.06) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    box-shadow:
+      inset 1px 1px 0px rgba(255, 255, 255, 0.18),
+      inset 0 0 4px rgba(255, 255, 255, 0.08) !important;
+  }
+  .k_ui_dropdown_sort_list_input::placeholder,
+  ._0_k_ui_dropdown_sort_list_input::placeholder {
+    color: rgba(255, 255, 255, 0.40) !important;
   }
 }
 
@@ -1083,47 +1193,6 @@ body {
     background: none !important;
   }
 
-.m-h {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99;
-    background: transparent;
-    border-bottom: 1px solid var(--glass-border);
-    
-    box-shadow: var(--glass-rim-bottom), 0 4px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .m-h::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(255, 255, 255, 0.70) 25%,
-      rgba(255, 255, 255, 0.95) 50%,
-      rgba(255, 255, 255, 0.70) 75%,
-      transparent 100%
-    );
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .m-h::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    -webkit-backdrop-filter: var(--glass-blur-refract);
-    backdrop-filter: var(--glass-blur-refract);
-    filter: var(--glass-distort-header);   
-    background: var(--glass-bg-refract);
-    z-index: -1;
-    pointer-events: none;
-  }
-
 .h-w {
     background: var(--glass-bg);
     -webkit-backdrop-filter: var(--glass-blur);
@@ -1136,14 +1205,14 @@ body {
   }
 
   .top-nav {
-    padding-top: 150px !important;
     z-index: 1;
+  }
+  
+  body:has(.doggo_sit_a) .top-nav {
+    padding-top: 150px !important;
   }
 
 .quick-settings {
-    background: transparent !important;
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
     border: none !important;
     border-radius: 0 !important;
   }
@@ -1193,11 +1262,7 @@ body:not(:has(.doggo_sit_a)) .d,
     border-radius: 14px !important;
   }
 
-  .m-app-logo {
-    color: var(--text) !important;
-  }
-
-  .logo {
+.logo {
     display: none !important;
     filter: none !important;
   }
@@ -1207,25 +1272,7 @@ body:not(:has(.doggo_sit_a)) .d,
     height: auto;
   }
 
-  .sri-group,
-  .search-result {
-    border-bottom: 0 !important;
-  }
-
-.s-f-w.--active {
-    background: transparent !important;
-    padding-top: 90px;
-  }
-
-body:has(.doggo_sit_a) .s-f-w.--active {
-    padding-top: 90px;
-  }
-
-.s-f-w.--active .auto_suggestions {
-    border-radius: 0 0 24px 24px !important;
-  }
-
-  .main-footer::after {
+.main-footer::after {
     content: "© Kagi. Humanize the Web.\A© Visnes. Themenize the Kagi.";
     font-size: 0.7rem;
     display: block;
@@ -1276,5 +1323,30 @@ body:has(.doggo_sit_a) .s-f-w.--active {
 
 .landing_cat_buttons {
     overflow-y: visible !important;
+  }
+
+.quick-settings {
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg) !important;
+  }
+  .quick-settings::after {
+    display: none;   
+  }
+  
+  body:not(:has(.doggo_sit_a)) .quick-settings {
+    -webkit-backdrop-filter: blur(30px) saturate(150%) brightness(1.04);
+    backdrop-filter: blur(30px) saturate(150%) brightness(1.04);
+    background: rgba(255, 255, 255, 0.62) !important;
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not(:has(.doggo_sit_a)) .quick-settings {
+      background: rgba(24, 24, 32, 0.68) !important;
+    }
+  }
+
+.sri-group,
+  .search-result {
+    border-bottom: 0 !important;
   }
 }
