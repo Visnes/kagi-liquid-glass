@@ -27,10 +27,10 @@ Settings for how much transparency, the frostiness of the layers etc. can be cha
 <img width="1403" height="247" alt="image" src="https://github.com/user-attachments/assets/3a18ae04-1fc7-42cf-af9d-0efde3758964" />
 
 ## Responsiveness
-<p><img width="248" alt="2026-06-20 14 28 13" src="https://github.com/user-attachments/assets/8e74c4c5-6754-4248-85ea-a2ae4677c6e9" />
-<img width="248" alt="2026-06-20 14 29 29" src="https://github.com/user-attachments/assets/dabc4ce1-f0f2-4340-8d3b-6107ba86dac8" /></p>
-<p><img width="248" alt="2026-06-20 14 28 48" src="https://github.com/user-attachments/assets/8ebc2e3d-93e8-4e3f-bbcf-b9b82856e08c" />
-<img width="248" alt="2026-06-20 14 29 10" src="https://github.com/user-attachments/assets/0bf6395b-e88e-4e74-bdd8-6037e0eb8bf1" /></p>
+<p><img width="419" alt="2026-06-20 14 28 13" src="https://github.com/user-attachments/assets/8e74c4c5-6754-4248-85ea-a2ae4677c6e9" />
+<img width="419" alt="2026-06-20 14 29 29" src="https://github.com/user-attachments/assets/dabc4ce1-f0f2-4340-8d3b-6107ba86dac8" /></p>
+<p><img width="419" alt="2026-06-20 14 28 48" src="https://github.com/user-attachments/assets/8ebc2e3d-93e8-4e3f-bbcf-b9b82856e08c" />
+<img width="419" alt="2026-06-20 14 29 10" src="https://github.com/user-attachments/assets/0bf6395b-e88e-4e74-bdd8-6037e0eb8bf1" /></p>
 <p>
   <img width="787" height="874" alt="image" src="https://github.com/user-attachments/assets/a8f1055a-5ad7-48b0-9d7e-ef78e81529a4" />
   <img width="787" height="874" alt="image" src="https://github.com/user-attachments/assets/affa4a89-a28b-4a3b-acbe-9d8fd61a2e21" />
