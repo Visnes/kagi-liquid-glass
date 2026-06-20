@@ -12,7 +12,7 @@ This is still being worked on, so there are bugs!
 3. Enable Custom CSS & Paste the entirety of custom.css
 4. Save changes and profit?
 
-Settings for how much transparency, the frostiness of the layers etc. can be changed at the top of the file. You can also use your own background images.
+Settings for how much transparency, the frostiness of the layers etc. can be changed at the top of the file. ~~You can also use your own background images.~~
 
 <img width="1898" height="1080" alt="kagiliquidglassdarklight" src="https://github.com/user-attachments/assets/619b9e04-472c-4dec-9020-bb14fc98b021" />
 
