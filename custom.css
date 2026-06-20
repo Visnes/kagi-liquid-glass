@@ -147,10 +147,10 @@ body {
   }
   
   body:has(.doggo_sit_a) {
-    background-color: #1e44a8;
+    background-color: #1740a3;
     background-image:
-      radial-gradient(135% 90% at 50% -10%, rgba(120,150,255,0.20) 0%, rgba(10,12,40,0) 55%),
-      linear-gradient(165deg, #2a2bb6 0%, #2f38b8 26%, #1e44a8 56%, #0b379c 82%, #233b8f 100%);
+      radial-gradient(130% 90% at 50% -8%, rgba(125,120,255,0.26) 0%, rgba(10,12,40,0) 55%),
+      linear-gradient(165deg, #16179f 0%, #3231c2 17%, #2c40b4 38%, #1a43a6 58%, #0a379b 80%, #1f3584 100%);
     background-size:     cover, cover;
     background-position: center, center;
     background-repeat:   no-repeat, no-repeat;
@@ -809,6 +809,10 @@ background:
 
 ._0_lenses.filter-item {
   all: unset;
+}
+
+._0_lenses.filter-item::after {
+  display: none !important;
 }
 
 .k_ui_dropdown.__basic {
