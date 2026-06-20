@@ -13,8 +13,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap);
 
 :root {
-  --wallpaper-light: url("NOT USED RIGHT NOW");
-  --wallpaper-dark:  url("NOT USED RIGHT NOW");
+  --wallpaper-light: url("https://visnes.org/dump/tahoe-light.webp");
+  --wallpaper-dark:  url("https://visnes.org/dump/tahoe-dark.webp");
 }
 
 :root {
@@ -45,6 +45,9 @@ Two tunings: large (scale 52, coarse freq) for big panels (header / mobile heade
   --glass-rim-dark:
     inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.28),
     inset 0 0 6px 1px  rgba(255, 255, 255, 0.12);
+
+--glass-rim-bottom-light: inset 0 -1.5px 0 rgba(255, 255, 255, 0.55);
+  --glass-rim-bottom-dark:  inset 0 -1px   0 rgba(255, 255, 255, 0.16);
 
 --glass-border-light: rgba(255, 255, 255, 0.40);
   --glass-border-dark:  rgba(255, 255, 255, 0.14);
@@ -77,6 +80,7 @@ Two tunings: large (scale 52, coarse freq) for big panels (header / mobile heade
   --glass-bg-refract: var(--glass-bg-refract-light);
   --glass-border: var(--glass-border-light);
   --glass-rim:    var(--glass-rim-light);
+  --glass-rim-bottom: var(--glass-rim-bottom-light);
   --glass-shadow: var(--glass-shadow-light);
   --btn-glass-bg: var(--btn-glass-bg-light);
 }
@@ -89,6 +93,7 @@ Two tunings: large (scale 52, coarse freq) for big panels (header / mobile heade
     --glass-bg-refract: var(--glass-bg-refract-dark);
     --glass-border: var(--glass-border-dark);
     --glass-rim:    var(--glass-rim-dark);
+    --glass-rim-bottom: var(--glass-rim-bottom-dark);
     --glass-shadow: var(--glass-shadow-dark);
     --btn-glass-bg: var(--btn-glass-bg-dark);
   }
@@ -102,6 +107,7 @@ Two tunings: large (scale 52, coarse freq) for big panels (header / mobile heade
     --glass-bg-refract: var(--glass-bg-refract-light);
     --glass-border: var(--glass-border-light);
     --glass-rim:    var(--glass-rim-light);
+    --glass-rim-bottom: var(--glass-rim-bottom-light);
     --glass-shadow: var(--glass-shadow-light);
     --btn-glass-bg: var(--btn-glass-bg-light);
   }
@@ -247,7 +253,7 @@ a.nav-item-link.--active {
 background: transparent;
   border-bottom: 1px solid var(--glass-border);
   
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  box-shadow: var(--glass-rim-bottom), 0 4px 24px rgba(0, 0, 0, 0.10);
 }
 
 .app-header::after {
@@ -1082,7 +1088,7 @@ body {
     background: transparent;
     border-bottom: 1px solid var(--glass-border);
     
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--glass-rim-bottom), 0 4px 16px rgba(0, 0, 0, 0.12);
   }
 
   .m-h::before {
