@@ -14,6 +14,8 @@ This is still being worked on, so there are bugs!
 
 Settings for how much transparency, the frostiness of the layers etc. can be changed at the top of the file. You can also use your own background images.
 
+<img width="1898" height="1080" alt="kagiliquidglassdarklight" src="https://github.com/user-attachments/assets/619b9e04-472c-4dec-9020-bb14fc98b021" />
+
 ## Bug
 - Currently the background images have been removed as they throw a CSP error, so something is blocking it (in talks with Kagi about it)
 
