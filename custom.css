@@ -24,9 +24,20 @@
 --glass-bg-light: rgba(255, 255, 255, var(--glass-opacity));
   --glass-bg-dark:  rgba(22, 22, 30,  calc(var(--glass-opacity) + 0.32));
 
+--glass-bg-refract-light: rgba(255, 255, 255, 0.10);
+  --glass-bg-refract-dark:  rgba(22, 22, 30, 0.20);
+
 --glass-blur: blur(var(--blur-radius)) saturate(140%) brightness(1.04) contrast(1.02);
 
---glass-distort: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22glass-distortion%22%20x%3D%220%25%22%20y%3D%220%25%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.01%200.01%22%20numOctaves%3D%222%22%20seed%3D%2292%22%20result%3D%22noise%22%2F%3E%3CfeGaussianBlur%20in%3D%22noise%22%20stdDeviation%3D%222%22%20result%3D%22blur%22%2F%3E%3CfeDisplacementMap%20in%3D%22SourceGraphic%22%20in2%3D%22blur%22%20scale%3D%2236%22%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#glass-distortion');
+--glass-blur-refract: blur(2px) saturate(150%) brightness(1.04);
+
+Two tunings: large (scale 52, coarse freq) for big panels (header / mobile header)
+     where ~26px edge-bleed is harmless; small (scale 22, fine freq) for pills/buttons
+     where a big scale would bleed un-distorted backdrop across the whole element. */
+  --glass-distort:    url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22glass-distortion%22%20x%3D%220%25%22%20y%3D%220%25%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.008%200.008%22%20numOctaves%3D%222%22%20seed%3D%2292%22%20result%3D%22noise%22%2F%3E%3CfeGaussianBlur%20in%3D%22noise%22%20stdDeviation%3D%222%22%20result%3D%22blur%22%2F%3E%3CfeDisplacementMap%20in%3D%22SourceGraphic%22%20in2%3D%22blur%22%20scale%3D%2252%22%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#glass-distortion');
+  --glass-distort-sm: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22glass-distortion%22%20x%3D%220%25%22%20y%3D%220%25%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.014%200.014%22%20numOctaves%3D%222%22%20seed%3D%2292%22%20result%3D%22noise%22%2F%3E%3CfeGaussianBlur%20in%3D%22noise%22%20stdDeviation%3D%222%22%20result%3D%22blur%22%2F%3E%3CfeDisplacementMap%20in%3D%22SourceGraphic%22%20in2%3D%22blur%22%20scale%3D%2222%22%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#glass-distortion');
+  
+  --glass-distort-header: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22glass-distortion%22%20x%3D%220%25%22%20y%3D%220%25%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.014%200.014%22%20numOctaves%3D%222%22%20seed%3D%2292%22%20result%3D%22noise%22%2F%3E%3CfeGaussianBlur%20in%3D%22noise%22%20stdDeviation%3D%222%22%20result%3D%22blur%22%2F%3E%3CfeDisplacementMap%20in%3D%22SourceGraphic%22%20in2%3D%22blur%22%20scale%3D%2212%22%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#glass-distortion');
 
 --glass-rim-light:
     inset 1.5px 1.5px 0px rgba(255, 255, 255, 0.90),
@@ -63,6 +74,7 @@
 --bg:           var(--bg-light);
   --text:         var(--text-light);
   --glass-bg:     var(--glass-bg-light);
+  --glass-bg-refract: var(--glass-bg-refract-light);
   --glass-border: var(--glass-border-light);
   --glass-rim:    var(--glass-rim-light);
   --glass-shadow: var(--glass-shadow-light);
@@ -74,6 +86,7 @@
     --bg:           var(--bg-dark);
     --text:         var(--text-dark);
     --glass-bg:     var(--glass-bg-dark);
+    --glass-bg-refract: var(--glass-bg-refract-dark);
     --glass-border: var(--glass-border-dark);
     --glass-rim:    var(--glass-rim-dark);
     --glass-shadow: var(--glass-shadow-dark);
@@ -86,6 +99,7 @@
     --bg:           var(--bg-light);
     --text:         var(--text-light);
     --glass-bg:     var(--glass-bg-light);
+    --glass-bg-refract: var(--glass-bg-refract-light);
     --glass-border: var(--glass-border-light);
     --glass-rim:    var(--glass-rim-light);
     --glass-shadow: var(--glass-shadow-light);
@@ -235,11 +249,11 @@ background: transparent;
   content: "";
   position: absolute;
   inset: 0;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur-refract);
+  backdrop-filter: var(--glass-blur-refract);
   
-  filter: var(--glass-distort);
-  background: var(--glass-bg);
+  filter: var(--glass-distort-header);
+  background: var(--glass-bg-refract);
   z-index: -1;
   pointer-events: none;
 }
@@ -564,9 +578,9 @@ background:
     ) center bottom / 80% 40% no-repeat,
     linear-gradient(
       160deg,
-      rgba(10, 132, 255, 0.52) 0%,
-      rgba(0, 122, 255, 0.46) 50%,
-      rgba(0, 100, 220, 0.52) 100%
+      rgba(10, 132, 255, 0.40) 0%,
+      rgba(0, 122, 255, 0.34) 50%,
+      rgba(0, 100, 220, 0.40) 100%
     );
 
   box-shadow:
@@ -581,9 +595,9 @@ background:
   inset: 0;
   border-radius: inherit;
   z-index: -1;
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
-  backdrop-filter: blur(8px) saturate(140%);
-  filter: var(--glass-distort);
+  -webkit-backdrop-filter: var(--glass-blur-refract);
+  backdrop-filter: var(--glass-blur-refract);
+  filter: var(--glass-distort-sm);
   pointer-events: none;
 }
 
@@ -617,6 +631,13 @@ background:
     inset 1px 1px 0px rgba(255, 255, 255, 0.55),
     inset 0 0 4px 1px rgba(255, 255, 255, 0.25),
     var(--btn-blue-shadow);
+}
+
+.btn.--primary,
+.btn.--primary:hover,
+.btn.--primary:focus,
+.btn.--primary:active {
+  background-color: transparent !important;
 }
 
 #searchFormSubmit {
@@ -655,7 +676,7 @@ background:
   border-radius: inherit;
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  filter: var(--glass-distort);   
+  
   background: var(--btn-glass-bg);
   z-index: -1;
   pointer-events: none;
@@ -873,10 +894,10 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    filter: var(--glass-distort);   
-    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur-refract);
+    backdrop-filter: var(--glass-blur-refract);
+    filter: var(--glass-distort-header);   
+    background: var(--glass-bg-refract);
     z-index: -1;
     pointer-events: none;
   }
